@@ -16,12 +16,12 @@ export async function AuthShowcase() {
             "use server";
             await auth.api.signInSocial({
               body: {
-                provider: "discord",
+                provider: "github",
               },
             });
           }}
         >
-          Sign in with Discord
+          Sign in with Github
         </Button>
       </form>
     );
