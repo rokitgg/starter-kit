@@ -64,10 +64,8 @@ packages
   └─ ui
       └─ Start of a UI package for the webapp using shadcn-ui
 tooling
-  ├─ eslint
-  |   └─ shared, fine-grained, eslint presets
-  ├─ prettier
-  |   └─ shared prettier configuration
+  ├─ biome
+  |   └─ lint and format using Biome
   ├─ tailwind
   |   └─ shared tailwind configuration
   └─ typescript
