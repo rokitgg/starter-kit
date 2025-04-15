@@ -19,6 +19,7 @@ const base = oc.errors({
 export const listPostsContract = base
   .route({
     summary: "List Posts",
+    method: "GET",
     description: "Retrieve all available posts",
     deprecated: false,
     tags: ["Posts"],
@@ -28,6 +29,7 @@ export const listPostsContract = base
 export const findPostContract = base
   .route({
     summary: "Find Post",
+    method: "GET",
     description: "Retrieve a post by its ID",
     deprecated: false,
     tags: ["Posts"],
@@ -45,6 +47,7 @@ export const createPostContract = base
     summary: "Create Post",
     description: "Create a new post",
     deprecated: false,
+    successStatus: 201,
     tags: ["Posts"],
   })
   .input(PostSchema.omit({ id: true }))
@@ -72,6 +75,6 @@ export const deletePostContract = base
 export const contract = {
   list: listPostsContract,
   find: findPostContract,
-  delete: deletePostContract,
   create: createPostContract,
+  delete: deletePostContract,
 };

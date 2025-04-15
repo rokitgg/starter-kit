@@ -40,6 +40,6 @@ export const createPost = os.create.handler(({ input, errors }) => {
 export const postRouter = os.router({
   list: listPosts,
   find: findPost,
-  delete: deletePost,
   create: createPost,
+  delete: deletePost,
 });

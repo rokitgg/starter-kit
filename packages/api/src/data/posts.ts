@@ -1,15 +1,4 @@
-export const posts: Post[] = [
-  {
-    id: "1",
-    title: "My first post",
-    content: "This is my first post",
-  },
-  {
-    id: "2",
-    title: "My second post",
-    content: "This is my second post",
-  },
-];
+export const posts: Post[] = [];
 
 export interface Post {
   id: string;
