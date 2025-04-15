@@ -3,6 +3,7 @@
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 
 import type { Outputs as RouterOutputs } from "@acme/api/types/outputs";
+import type { Inputs as RouterInputs } from "@acme/api/types/inputs";
 import { CreatePostSchema } from "@acme/db/schema";
 import { cn } from "@acme/ui";
 import { Button } from "@acme/ui/button";
@@ -12,17 +13,16 @@ import {
   FormField,
   FormItem,
   FormMessage,
-  useForm,
 } from "@acme/ui/form";
 import { Input } from "@acme/ui/input";
 import { toast } from "@acme/ui/toast";
+import { useForm } from "react-hook-form";
 
 import { useORPC } from "~/lib/context/orpc";
 const orpc = useORPC();
 
 export function CreatePostForm() {
-  const form = useForm({
-    schema: CreatePostSchema,
+  const form = useForm<RouterInputs["posts"]["create"]>({
     defaultValues: {
       content: "",
       title: "",
