@@ -17,7 +17,8 @@ import {
 import { Input } from "@acme/ui/input";
 import { toast } from "@acme/ui/toast";
 
-import { orpc } from "@acme/api/clients/react";
+import { useORPC } from "~/lib/context/orpc";
+const orpc = useORPC();
 
 export function CreatePostForm() {
   const form = useForm({
