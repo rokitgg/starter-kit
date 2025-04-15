@@ -23,11 +23,11 @@ apps
       └─ E2E Typesafe API Server & Client
 packages
   ├─ api
-  |   └─ oRPC v11 router definition
+  |   └─ oRPC v1.0 (stable)
   ├─ auth
   |   └─ Authentication using better-auth.
   ├─ db
-  |   └─ Typesafe db calls using Drizzle & Supabase
+  |   └─ Typesafe db calls powered by Drizzle
   └─ ui
       └─ Start of a UI package for the webapp using shadcn-ui
 tooling
