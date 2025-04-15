@@ -9,7 +9,7 @@ import { Toaster } from "@acme/ui/toast";
 import "~/app/globals.css";
 
 import { env } from "~/env";
-import { ReactQueryProvider } from "~/lib/providers/react-query";
+import { ContextProviders } from "~/lib/providers";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -50,7 +50,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <ReactQueryProvider>{props.children}</ReactQueryProvider>
+          <ContextProviders>{props.children}</ContextProviders>
           <div className="absolute bottom-4 right-4">
             <ThemeToggle />
           </div>
