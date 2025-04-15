@@ -1,15 +1,20 @@
 import { createEnv } from "@t3-oss/env-nextjs";
+import { vercel } from "@t3-oss/env-nextjs/presets-zod";
 import { z } from "zod";
 
 export const env = createEnv({
+  extends: [vercel()],
   server: {
     AUTH_DISCORD_ID: z.string().min(1),
     AUTH_DISCORD_SECRET: z.string().min(1),
-    AUTH_SECRET:
+    BETTER_AUTH_APP_NAME: z.string().min(1),
+    BETTER_AUTH_URL: z.string().default("http://localhost:3000"),
+    BETTER_AUTH_SECRET:
       process.env.NODE_ENV === "production"
         ? z.string().min(1)
         : z.string().min(1).optional(),
     NODE_ENV: z.enum(["development", "production"]).optional(),
+    PORT: z.string().default("3000"),
   },
   client: {},
   experimental__runtimeEnv: {},
