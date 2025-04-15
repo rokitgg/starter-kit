@@ -17,17 +17,21 @@ const base = oc.errors({
 });
 
 export const listPostsContract = base
-  .input(
-    z
-      .object({
-        limit: z.number().int().min(1).max(100).optional(),
-        cursor: z.number().int().min(0).default(0),
-      })
-      .optional(),
-  )
+  .route({
+    summary: "List Posts",
+    description: "Retrieve all available posts",
+    deprecated: false,
+    tags: ["Posts"],
+  })
   .output(z.array(PostSchema));
 
 export const findPostContract = base
+  .route({
+    summary: "Find Post",
+    description: "Retrieve a post by its ID",
+    deprecated: false,
+    tags: ["Posts"],
+  })
   .input(PostSchema.pick({ id: true }))
   .output(PostSchema)
   .errors({
@@ -37,10 +41,22 @@ export const findPostContract = base
   });
 
 export const createPostContract = base
+  .route({
+    summary: "Create Post",
+    description: "Create a new post",
+    deprecated: false,
+    tags: ["Posts"],
+  })
   .input(PostSchema.omit({ id: true }))
   .output(PostSchema);
 
-export const removePostContract = base
+export const deletePostContract = base
+  .route({
+    summary: "Delete Post",
+    description: "Delete a post by its ID",
+    deprecated: false,
+    tags: ["Posts"],
+  })
   .input(PostSchema.pick({ id: true }))
   .output(
     z.object({
@@ -56,6 +72,6 @@ export const removePostContract = base
 export const contract = {
   list: listPostsContract,
   find: findPostContract,
-  delete: removePostContract,
+  delete: deletePostContract,
   create: createPostContract,
 };
