@@ -13,14 +13,19 @@ import { env } from "../env";
  */
 
 export const auth = betterAuth({
-  appName: env.BETTER_AUTH_APP_NAME as string,
-  secret: env.BETTER_AUTH_SECRET as string,
-  baseUrl: env.BETTER_AUTH_URL as string,
+  appName: env.BETTER_AUTH_APP_NAME,
+  secret: env.BETTER_AUTH_SECRET,
+  baseUrl: env.BETTER_AUTH_URL,
   plugins: [openAPI()],
   emailAndPassword: {
     enabled: false,
   },
-  socialProviders: {},
+  socialProviders: {
+    github: {
+      clientId: env.GITHUB_ID,
+      clientSecret: env.GITHUB_SECRET,
+    },
+  },
   rateLimit: {
     enabled: true,
   },
