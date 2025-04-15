@@ -5,8 +5,8 @@ import { z } from "zod";
 export const env = createEnv({
   extends: [vercel()],
   server: {
-    AUTH_DISCORD_ID: z.string().min(1),
-    AUTH_DISCORD_SECRET: z.string().min(1),
+    GITHUB_ID: z.string().min(1),
+    GITHUB_SECRET: z.string().min(1),
     BETTER_AUTH_APP_NAME: z.string().min(1),
     BETTER_AUTH_URL: z.string().default("http://localhost:3000"),
     BETTER_AUTH_SECRET:
