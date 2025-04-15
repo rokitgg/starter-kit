@@ -10,7 +10,7 @@ import type { router } from "../root";
  * @see https://orpc.unnoq.com/docs/client/client-side
  */
 
-const rpcLink = new RPCLink({
+export const link = new RPCLink({
   url: new URL(
     "/rpc",
     typeof window !== "undefined"
@@ -34,7 +34,7 @@ const rpcLink = new RPCLink({
  * const { data } = orpc.posts.list.useQuery();
  * ```
  */
-export const api: RouterClient<typeof router> = createORPCClient(rpcLink);
+export const api: RouterClient<typeof router> = createORPCClient(link);
 
 // React query utils
 export const orpc = createORPCReactQueryUtils(api);

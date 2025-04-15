@@ -33,6 +33,7 @@ export function useForm<
 ) {
   const form = __useForm<TIn, unknown, TOut>({
     ...props,
+    // @ts-expect-error - TODO: fix this
     resolver: standardSchemaResolver(props.schema, undefined),
   });
 

@@ -2,6 +2,7 @@ import { implement } from "@orpc/server";
 
 import { contract } from "../contracts/post";
 import { posts } from "../data/posts";
+import { randomUUID as uuid } from "node:crypto";
 
 const os = implement(contract);
 
@@ -30,8 +31,15 @@ export const removePost = os.delete.handler(({ input, errors }) => {
   return { success: true };
 });
 
+export const createPost = os.create.handler(({ input, errors }) => {
+  const post = { id: uuid(), ...input };
+  posts.push(post);
+  return post;
+});
+
 export const postsRouter = os.router({
   list: listPosts,
   find: findPost,
   delete: removePost,
+  create: createPost,
 });

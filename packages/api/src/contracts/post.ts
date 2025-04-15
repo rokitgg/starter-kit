@@ -36,6 +36,10 @@ export const findPostContract = base
     },
   });
 
+export const createPostContract = base
+  .input(PostSchema.omit({ id: true }))
+  .output(PostSchema);
+
 export const removePostContract = base
   .input(PostSchema.pick({ id: true }))
   .output(
@@ -53,4 +57,5 @@ export const contract = {
   list: listPostsContract,
   find: findPostContract,
   delete: removePostContract,
+  create: createPostContract,
 };

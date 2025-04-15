@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  useMutation,
-  useQueryClient,
-  useSuspenseQuery,
-} from "@tanstack/react-query";
+import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 
 import type { Outputs as RouterOutputs } from "@acme/api/types/outputs";
 import { CreatePostSchema } from "@acme/db/schema";
@@ -21,11 +17,9 @@ import {
 import { Input } from "@acme/ui/input";
 import { toast } from "@acme/ui/toast";
 
-import { useTRPC } from "~/trpc/react";
 import { orpc } from "@acme/api/clients/react";
 
 export function CreatePostForm() {
-  const trpc = useTRPC();
   const form = useForm({
     schema: CreatePostSchema,
     defaultValues: {
@@ -34,20 +28,10 @@ export function CreatePostForm() {
     },
   });
 
-  const queryClient = useQueryClient();
   const createPost = useMutation(
-    trpc.post.create.mutationOptions({
-      onSuccess: async () => {
-        form.reset();
-        await queryClient.invalidateQueries(trpc.post.pathFilter());
-      },
-      onError: (err) => {
-        toast.error(
-          err.data?.code === "UNAUTHORIZED"
-            ? "You must be logged in to post"
-            : "Failed to create post",
-        );
-      },
+    orpc.posts.create.mutationOptions({
+      context: { cache: true }, // Provide client context if needed
+      // additional options...
     }),
   );
 
