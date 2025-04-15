@@ -19,9 +19,10 @@ import { toast } from "@acme/ui/toast";
 import { useForm } from "react-hook-form";
 
 import { useORPC } from "~/lib/context/orpc";
-const orpc = useORPC();
 
 export function CreatePostForm() {
+  const orpc = useORPC();
+
   const form = useForm<RouterInputs["posts"]["create"]>({
     defaultValues: {
       content: "",
@@ -75,6 +76,8 @@ export function CreatePostForm() {
 }
 
 export function PostList() {
+  const orpc = useORPC();
+
   const { data: posts } = useSuspenseQuery(
     orpc.posts.list.queryOptions({
       input: { limit: 10 }, // Specify input if needed
@@ -86,10 +89,6 @@ export function PostList() {
   if (posts.length === 0) {
     return (
       <div className="relative flex w-full flex-col gap-4">
-        <PostCardSkeleton pulse={false} />
-        <PostCardSkeleton pulse={false} />
-        <PostCardSkeleton pulse={false} />
-
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/10">
           <p className="text-2xl font-bold text-white">No posts yet</p>
         </div>
@@ -109,6 +108,8 @@ export function PostList() {
 export function PostCard(props: {
   post: RouterOutputs["posts"]["find"];
 }) {
+  const orpc = useORPC();
+
   const deletePost = useMutation(
     orpc.posts.delete.mutationOptions({
       context: { cache: true }, // Provide client context if needed
