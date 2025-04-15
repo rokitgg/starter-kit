@@ -14,21 +14,22 @@ import { ContextProviders } from "~/lib/providers";
 export const metadata: Metadata = {
   metadataBase: new URL(
     env.VERCEL_ENV === "production"
-      ? "https://turbo.t3.gg"
+      ? "https://ultimate-starter-kit.vercel.app"
       : "http://localhost:3000",
   ),
-  title: "Create T3 Turbo",
-  description: "Simple monorepo with shared backend for web & mobile apps",
+  title: "Ultimate Starter Kit",
+  description: "Ultimate Starter Kit",
   openGraph: {
-    title: "Create T3 Turbo",
-    description: "Simple monorepo with shared backend for web & mobile apps",
-    url: "https://create-t3-turbo.vercel.app",
-    siteName: "Create T3 Turbo",
+    title: "Ultimate Starter Kit",
+    description:
+      "A collection of the best open-souce tooling to build your full-stack application.",
+    url: "https://ultimate-starter-kit.vercel.app",
+    siteName: "Ultimate Starter Kit",
   },
   twitter: {
     card: "summary_large_image",
-    site: "@jullerino",
-    creator: "@jullerino",
+    site: "@rokitdotgg",
+    creator: "@rokitdotgg",
   },
 };
 
