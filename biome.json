@@ -14,7 +14,7 @@
   },
   "linter": {
     "enabled": true,
-    "ignore": ["node_modules", ".next", "dist"],
+    "ignore": ["node_modules/*", ".next/*", "dist/*"],
     "rules": {
       "recommended": true
     }
@@ -23,6 +23,6 @@
     "enabled": true,
     "indentStyle": "space",
     "indentWidth": 2,
-    "ignore": ["node_modules/*", ".next/*"]
+    "ignore": ["node_modules/*", ".next/*", "dist/*"]
   }
 }
