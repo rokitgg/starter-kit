@@ -19,7 +19,7 @@ export const findPost = os.find.handler(({ input, errors }) => {
   return post;
 });
 
-export const removePost = os.delete.handler(({ input, errors }) => {
+export const deletePost = os.delete.handler(({ input, errors }) => {
   const post = posts.find((post) => post.id === input.id);
 
   if (!post) {
@@ -37,9 +37,9 @@ export const createPost = os.create.handler(({ input, errors }) => {
   return post;
 });
 
-export const postsRouter = os.router({
+export const postRouter = os.router({
   list: listPosts,
   find: findPost,
-  delete: removePost,
+  delete: deletePost,
   create: createPost,
 });

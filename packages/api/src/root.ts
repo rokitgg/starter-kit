@@ -1,7 +1,7 @@
 import { os } from "@orpc/server";
 
-import { postsRouter } from "./routers/example";
+import { postRouter } from "./routers/post";
 
 export const router = os.router({
-  posts: postsRouter,
+  posts: postRouter,
 });
