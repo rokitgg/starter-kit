@@ -1,8 +1,11 @@
-import { auth, signIn, signOut } from "@acme/auth";
+import { auth } from "@acme/auth/server";
 import { Button } from "@acme/ui/button";
+import { headers } from "next/headers";
 
 export async function AuthShowcase() {
-  const session = await auth();
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
   if (!session) {
     return (
@@ -11,7 +14,11 @@ export async function AuthShowcase() {
           size="lg"
           formAction={async () => {
             "use server";
-            await signIn("discord");
+            await auth.api.signInSocial({
+              body: {
+                provider: "discord",
+              },
+            });
           }}
         >
           Sign in with Discord
@@ -31,7 +38,9 @@ export async function AuthShowcase() {
           size="lg"
           formAction={async () => {
             "use server";
-            await signOut();
+            await auth.api.signOut({
+              headers: await headers(),
+            });
           }}
         >
           Sign out

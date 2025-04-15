@@ -7,7 +7,15 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./src/index.ts"
-    }
+    },
+    "./clients/*": "./src/clients/*.ts",
+    "./types/*": "./src/types/*.ts",
+    "./middlewares/*": "./src/middlewares/*.ts",
+    "./orpc": "./src/orpc.ts",
+    "./client": "./src/client.ts",
+    "./routers": "./src/routers/index.ts",
+    "./root": "./src/root.ts",
+    "./server": "./src/server.ts"
   },
   "license": "MIT",
   "scripts": {
@@ -22,6 +30,10 @@
     "@acme/auth": "workspace:*",
     "@acme/db": "workspace:*",
     "@acme/validators": "workspace:*",
+    "@orpc/client": "^0.54.0",
+    "@orpc/contract": "^0.54.0",
+    "@orpc/react-query": "^0.54.0",
+    "@orpc/server": "^0.54.0",
     "superjson": "2.2.2",
     "zod": "catalog:"
   },

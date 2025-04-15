@@ -6,7 +6,7 @@ import {
   useSuspenseQuery,
 } from "@tanstack/react-query";
 
-import type { RouterOutputs } from "@acme/api";
+import type { Outputs as RouterOutputs } from "@acme/api/types/outputs";
 import { CreatePostSchema } from "@acme/db/schema";
 import { cn } from "@acme/ui";
 import { Button } from "@acme/ui/button";
@@ -22,6 +22,7 @@ import { Input } from "@acme/ui/input";
 import { toast } from "@acme/ui/toast";
 
 import { useTRPC } from "~/trpc/react";
+import { orpc } from "@acme/api/clients/react";
 
 export function CreatePostForm() {
   const trpc = useTRPC();
@@ -89,8 +90,13 @@ export function CreatePostForm() {
 }
 
 export function PostList() {
-  const trpc = useTRPC();
-  const { data: posts } = useSuspenseQuery(trpc.post.all.queryOptions());
+  const { data: posts } = useSuspenseQuery(
+    orpc.posts.list.queryOptions({
+      input: { limit: 10 }, // Specify input if needed
+      context: { cache: true }, // Provide client context if needed
+      // additional options...
+    }),
+  );
 
   if (posts.length === 0) {
     return (
@@ -116,22 +122,12 @@ export function PostList() {
 }
 
 export function PostCard(props: {
-  post: RouterOutputs["post"]["all"][number];
+  post: RouterOutputs["posts"]["find"];
 }) {
-  const trpc = useTRPC();
-  const queryClient = useQueryClient();
   const deletePost = useMutation(
-    trpc.post.delete.mutationOptions({
-      onSuccess: async () => {
-        await queryClient.invalidateQueries(trpc.post.pathFilter());
-      },
-      onError: (err) => {
-        toast.error(
-          err.data?.code === "UNAUTHORIZED"
-            ? "You must be logged in to delete a post"
-            : "Failed to delete post",
-        );
-      },
+    orpc.posts.delete.mutationOptions({
+      context: { cache: true }, // Provide client context if needed
+      // additional options...
     }),
   );
 
@@ -145,7 +141,7 @@ export function PostCard(props: {
         <Button
           variant="ghost"
           className="cursor-pointer text-sm font-bold uppercase text-primary hover:bg-transparent hover:text-white"
-          onClick={() => deletePost.mutate(props.post.id)}
+          onClick={() => deletePost.mutate({ id: props.post.id })}
         >
           Delete
         </Button>
